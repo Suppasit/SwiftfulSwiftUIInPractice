@@ -6,16 +6,37 @@
 //
 
 import SwiftUI
+import SwiftfulUI
+import SwiftfulRouting
 
 struct ContentView: View {
+    
+    @State private var users: [User] = []
+    @State private var products: [Product] = []
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView {
+            VStack {
+                ForEach(products) { product in
+                    Text(product.title)
+                    //Text(product.brand ?? "xxx")
+                }
+            }
         }
         .padding()
+        .task {
+            await getData()
+        }
+    }
+    
+    private func getData() async {
+        do {
+            users = try await DatabaseHelper().getUsers()
+            products = try await DatabaseHelper().getProducts()
+            print(products)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
