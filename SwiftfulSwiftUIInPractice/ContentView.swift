@@ -19,7 +19,7 @@ struct ContentView: View {
             VStack {
                 ForEach(products) { product in
                     Text(product.title)
-                    //Text(product.brand ?? "xxx")
+                        .foregroundStyle(.spotifyGreen)
                 }
             }
         }
@@ -31,8 +31,9 @@ struct ContentView: View {
     
     private func getData() async {
         do {
-            users = try await DatabaseHelper().getUsers()
+            // users = try await DatabaseHelper().getUsers()
             products = try await DatabaseHelper().getProducts()
+            print("🎉 succefully get the data!")
             print(products)
         } catch {
             print(error.localizedDescription)

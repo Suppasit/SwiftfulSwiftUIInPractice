@@ -11,7 +11,8 @@ import SwiftUI
 struct SwiftfulSwiftUIInPracticeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SpotifyHomeView()
+//            ContentView()
         }
     }
 }
