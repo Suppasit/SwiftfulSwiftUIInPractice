@@ -13,6 +13,7 @@ struct SpotifyHomeView: View {
     @State private var currentUser: User? = nil
     @State private var selectedCategory: Category? = nil
     @State private var products: [Product] = []
+    @State private var productRows: [ProductRow] = []
 
     var body: some View {
         ZStack {
@@ -23,19 +24,15 @@ struct SpotifyHomeView: View {
                     Section {
                         VStack(spacing: 16) {
                             recentsSection
-                            
+                                .padding(.horizontal, 16)
+
                             if let product = products.first {
                                 newReleaseSection(product: product)
+                                    .padding(.horizontal, 16)
                             }
+                            
+                            listRows
                         }
-                        .padding(.horizontal, 16)
-                        
-                        ForEach(0..<20) { _ in
-                            Rectangle()
-                                .fill(Color.red)
-                                .frame(width: 200, height: 200)
-                        }
-
                     } header: {
                         header
                     }
@@ -55,6 +52,16 @@ struct SpotifyHomeView: View {
         do {
             currentUser = try await DatabaseHelper().getUsers().first
             products = try await Array(DatabaseHelper().getProducts().prefix(8))
+            
+            var rows: [ProductRow] = []
+            let allBrands = Set(products.map { $0.brand })
+            for brand in allBrands {
+                guard let brand else { return }
+//                let products = self.products.filter { $0.brand == brand }
+                rows.append(ProductRow(title: brand.capitalized, products: self.products))
+            }
+            productRows = rows
+            
             print("🎉 succefully get the data!")
         } catch {
             print(error.localizedDescription)
@@ -102,6 +109,9 @@ struct SpotifyHomeView: View {
                     imageName: product.firstImage,
                     title: product.title
                 )
+                .asButton(.press) {
+                    
+                }
             }
         }
     }
@@ -121,6 +131,37 @@ struct SpotifyHomeView: View {
             }
         )
     }
+    
+    private var listRows: some View {
+        ForEach(productRows) { row in
+            VStack(spacing: 8) {
+                Text(row.title)
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.spotifyWhite)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 16)
+
+                ScrollView(.horizontal) {
+                    HStack(alignment: .top, spacing: 16) {
+                        ForEach(row.products) { product in
+                            ImageTitleRowCell(
+                                imageSize: 120,
+                                imageName: product.firstImage,
+                                title: product.title
+                            )
+                            .asButton(.press) {
+                                
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                }
+                .scrollIndicators(.hidden)
+            }
+        }
+    }
+    
 }
 
 #Preview {
