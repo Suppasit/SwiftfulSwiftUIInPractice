@@ -26,9 +26,11 @@
 		B451CBDF2C48B211003C4B4B /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = B451CBDE2C48B211003C4B4B /* SwiftfulUI */; };
 		B451CBE22C48B22E003C4B4B /* SwiftfulRouting in Frameworks */ = {isa = PBXBuildFile; productRef = B451CBE12C48B22E003C4B4B /* SwiftfulRouting */; };
 		B45565832C4F4D2400086C8A /* SpotifyHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B45565822C4F4D2400086C8A /* SpotifyHomeView.swift */; };
+		B47DA38B2C6AF2D600C2317B /* BumbleFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47DA38A2C6AF2D600C2317B /* BumbleFilterView.swift */; };
 		B49748152C50A2B70080D5AB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49748142C50A2B70080D5AB /* Category.swift */; };
 		B4AC32FC2C51E8BE00C67476 /* SpotifyRecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AC32FB2C51E8BE00C67476 /* SpotifyRecentCell.swift */; };
 		B4B0B3312C5330E400470DF0 /* SpotifyNewReleaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B0B3302C5330E400470DF0 /* SpotifyNewReleaseCell.swift */; };
+		B4C5FAFB2C698F5B00D45B8B /* BumbleHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C5FAFA2C698F5B00D45B8B /* BumbleHomeView.swift */; };
 		B4C900162C5099E700E32EE2 /* SpotifyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C900152C5099E700E32EE2 /* SpotifyColors.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,9 +53,11 @@
 		B451CBD92C48ADC6003C4B4B /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B451CBDB2C48ADE0003C4B4B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B45565822C4F4D2400086C8A /* SpotifyHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyHomeView.swift; sourceTree = "<group>"; };
+		B47DA38A2C6AF2D600C2317B /* BumbleFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumbleFilterView.swift; sourceTree = "<group>"; };
 		B49748142C50A2B70080D5AB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B4AC32FB2C51E8BE00C67476 /* SpotifyRecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyRecentCell.swift; sourceTree = "<group>"; };
 		B4B0B3302C5330E400470DF0 /* SpotifyNewReleaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyNewReleaseCell.swift; sourceTree = "<group>"; };
+		B4C5FAFA2C698F5B00D45B8B /* BumbleHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BumbleHomeView.swift; sourceTree = "<group>"; };
 		B4C900152C5099E700E32EE2 /* SpotifyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +96,7 @@
 			children = (
 				B402BC632C475C2700E74CA7 /* SwiftfulSwiftUIInPracticeApp.swift */,
 				B402BC652C475C2700E74CA7 /* ContentView.swift */,
+				B4C5FAF72C698DF600D45B8B /* Bumble */,
 				B455657F2C4F4CF000086C8A /* Spotify */,
 				B402BC752C47602C00E74CA7 /* Shared */,
 				B402BC672C475C2800E74CA7 /* Assets.xcassets */,
@@ -161,6 +166,31 @@
 				B49748142C50A2B70080D5AB /* Category.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B4C5FAF72C698DF600D45B8B /* Bumble */ = {
+			isa = PBXGroup;
+			children = (
+				B4C5FAF92C698F4100D45B8B /* Core */,
+				B4C5FAF82C698F3200D45B8B /* Components */,
+			);
+			path = Bumble;
+			sourceTree = "<group>";
+		};
+		B4C5FAF82C698F3200D45B8B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B4C5FAF92C698F4100D45B8B /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B4C5FAFA2C698F5B00D45B8B /* BumbleHomeView.swift */,
+				B47DA38A2C6AF2D600C2317B /* BumbleFilterView.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4C5FAFB2C698F5B00D45B8B /* BumbleHomeView.swift in Sources */,
 				B402BC772C47604E00E74CA7 /* ImageLoaderView.swift in Sources */,
 				B43941C02C5875F70047E0BB /* ImageTitleRowCell.swift in Sources */,
 				B4AC32FC2C51E8BE00C67476 /* SpotifyRecentCell.swift in Sources */,
@@ -251,6 +282,7 @@
 				B44E5EF82C6068440080F3B8 /* SongRowCell.swift in Sources */,
 				B43BD5FA2C508B61007509A7 /* SpotifyCategoryCell.swift in Sources */,
 				B4C900162C5099E700E32EE2 /* SpotifyColors.swift in Sources */,
+				B47DA38B2C6AF2D600C2317B /* BumbleFilterView.swift in Sources */,
 				B451CBD82C48A833003C4B4B /* DatabaseHelper.swift in Sources */,
 				B45565832C4F4D2400086C8A /* SpotifyHomeView.swift in Sources */,
 				B402BC662C475C2700E74CA7 /* ContentView.swift in Sources */,
