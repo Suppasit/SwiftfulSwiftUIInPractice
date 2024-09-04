@@ -29,36 +29,15 @@ struct NetflixHomeView: View {
                         .frame(height: fullHeaderSize.height)
                     
                     if let heroProduct {
-                        NetflixHeroCell(
-                            imageName: heroProduct.firstImage,
-                            isNetflixFilm: true,
-                            title: heroProduct.title,
-                            categories: [
-                                heroProduct.category.capitalized,
-                                heroProduct.brand ?? "XXX"
-                            ],
-                            onBackgroundPressed: {
-                                
-                            },
-                            onPlayPressed: {
-                                
-                            },
-                            onMyListPressed: {
-                                
-                            }
-                        )
-                        .padding(24)
+                        heroCell(product: heroProduct)
                     }
                     
-                    ForEach(0..<20) { _ in
-                        Rectangle()
-                            .fill(Color.red)
-                            .frame(height: 200)
-                    }
+                    categoryRows
+                    
                 }
             }
             .scrollIndicators(.hidden)
-
+            
             VStack(spacing: 0) {
                 header
                     .padding(.horizontal, 16)
@@ -84,7 +63,7 @@ struct NetflixHomeView: View {
         }
         .toolbarVisibility(.hidden, for: .navigationBar)
     }
-
+    
     private func getData() async {
         guard productRows.isEmpty else { return }
         
@@ -94,14 +73,11 @@ struct NetflixHomeView: View {
             heroProduct = products.first
             
             var rows: [ProductRow] = []
-            let allBrands = Set(products.map { $0.brand })
+            let allBrands = Set(products.compactMap { $0.brand })
             for brand in allBrands {
-                guard let brand else { return }
                 rows.append(ProductRow(title: brand.capitalized, products: products))
             }
             productRows = rows
-            
-            print("🎉 succefully get the data!")
         } catch {
             print(error.localizedDescription)
         }
@@ -125,6 +101,54 @@ struct NetflixHomeView: View {
                     }
             }
             .font(.title2)
+        }
+    }
+    
+    private func heroCell(product: Product) -> some View {
+        NetflixHeroCell(
+            imageName: product.firstImage,
+            isNetflixFilm: true,
+            title: product.title,
+            categories: [
+                product.category.capitalized,
+                product.brand ?? "XXX"
+            ],
+            onBackgroundPressed: {
+                
+            },
+            onPlayPressed: {
+                
+            },
+            onMyListPressed: {
+                
+            }
+        )
+        .padding(24)
+        
+    }
+    
+    private var categoryRows: some View {
+        LazyVStack(spacing: 16) {
+            ForEach(Array(productRows.enumerated()), id: \.offset) { rowIndex, row in
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(row.title)
+                        .font(.headline)
+                    
+                    ScrollView(.horizontal) {
+                        LazyHStack {
+                            ForEach(Array(row.products.enumerated()), id: \.offset) { index, product in
+                                NetflixMoviewCell(
+                                    imageName: product.firstImage,
+                                    title: product.title,
+                                    isRecentlyAdded:  product.recentlyAdded,
+                                    topTenRanking: rowIndex == 1 ? index : nil
+                                )
+                            }
+                        }
+                    }
+                    .scrollIndicators(.hidden)
+                }
+            }
         }
     }
     
